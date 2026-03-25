@@ -32,7 +32,8 @@
       font-weight: 500;
       font-size: 14px;
     }
-    input {
+    input[type="text"],
+    input[type="email"] {
       width: 100%;
       padding: 8px 12px;
       margin-bottom: 16px;
@@ -40,6 +41,38 @@
       border-radius: 4px;
       font-size: 14px;
       box-sizing: border-box;
+    }
+    .radio-group {
+      margin-bottom: 16px;
+    }
+    .radio-label {
+      margin-bottom: 8px;
+      font-weight: 500;
+      font-size: 14px;
+    }
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-weight: 400;
+      font-size: 14px;
+    }
+    .radio-option input {
+      margin: 0;
+    }
+    .button-set {
+      margin-bottom: 16px;
+    }
+    .button-set-title {
+      margin: 0 0 8px;
+      font-weight: 500;
+      font-size: 14px;
+    }
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
     button {
       background: #2563eb;
@@ -65,16 +98,77 @@
       <input type="email" id="email" name="email" required>
       <label for="message">Message</label>
       <input type="text" id="message" name="message" required>
+
+      <div class="radio-group">
+        <div class="radio-label">Preferred contact method</div>
+        <label class="radio-option">
+          <input type="radio" name="contactMethod" value="email" checked>
+          Email
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="contactMethod" value="phone">
+          Phone
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="contactMethod" value="either">
+          Either
+        </label>
+      </div>
+
+      <div class="button-set">
+        <div class="button-set-title">Quick actions</div>
+        <div class="button-row">
+          <button type="button" id="fillExample">Fill example</button>
+          <button type="button" id="clearForm">Clear</button>
+        </div>
+      </div>
+
+      <div class="button-set">
+        <div class="button-set-title">Message templates</div>
+        <div class="button-row">
+          <button type="button" data-template="hello">Hello</button>
+          <button type="button" data-template="quote">Request a quote</button>
+          <button type="button" data-template="support">Need support</button>
+        </div>
+      </div>
+
       <button type="submit">Submit</button>
     </form>
   </div>
   <script>
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
+    const form = document.getElementById('contactForm');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const messageInput = document.getElementById('message');
+
+    document.getElementById('fillExample').addEventListener('click', function() {
+      nameInput.value = 'Jane Doe';
+      emailInput.value = 'jane.doe@example.com';
+      messageInput.value = 'Hi! I wanted to reach out about a quick question.';
+    });
+
+    document.getElementById('clearForm').addEventListener('click', function() {
+      form.reset();
+    });
+
+    document.querySelectorAll('[data-template]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const template = btn.getAttribute('data-template');
+        if (template === 'hello') messageInput.value = 'Hello!';
+        if (template === 'quote') messageInput.value = 'Could I get a quote for your services?';
+        if (template === 'support') messageInput.value = 'I need help with an issue I am running into.';
+      });
+    });
+
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
+
+      const contactMethodEl = document.querySelector('input[name="contactMethod"]:checked');
       console.log('Form submitted:', {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        message: document.getElementById('message').value,
+        name: nameInput.value,
+        email: emailInput.value,
+        message: messageInput.value,
+        contactMethod: contactMethodEl ? contactMethodEl.value : null,
       });
       alert('Form submitted!');
     });
