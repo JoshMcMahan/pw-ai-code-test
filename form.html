@@ -41,6 +41,12 @@
       font-size: 14px;
       box-sizing: border-box;
     }
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
     button {
       background: #2563eb;
       color: white;
@@ -53,19 +59,29 @@
     button:hover {
       background: #1d4ed8;
     }
+    button.secondary {
+      background: #e5e7eb;
+      color: #111827;
+    }
+    button.secondary:hover {
+      background: #d1d5db;
+    }
   </style>
 </head>
 <body>
   <div class="form-container">
     <h1>Contact Form</h1>
     <form id="contactForm">
+      <div class="form-actions">
+        <button type="submit">Submit</button>
+        <button type="reset" class="secondary">Clear</button>
+      </div>
       <label for="name">Name</label>
       <input type="text" id="name" name="name" required>
       <label for="email">Email</label>
       <input type="email" id="email" name="email" required>
       <label for="message">Message</label>
       <input type="text" id="message" name="message" required>
-      <button type="submit">Submit</button>
     </form>
   </div>
   <script>
