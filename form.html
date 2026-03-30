@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PW AI Code Test</title>
   <style>
+    :root {
+      --purple-600: #6d28d9;
+      --purple-700: #5b21b6;
+    }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       display: flex;
@@ -60,30 +64,31 @@
       display: flex;
       justify-content: flex-end;
       gap: 12px;
-      margin-top: 8px;
-      padding-top: 8px;
+      margin: 0 0 16px;
+      padding: 0;
     }
     button {
-      background: #000000;
+      background: var(--purple-600);
       color: white;
-      border: 1px solid #000000;
+      border: 1px solid var(--purple-600);
       padding: 10px 16px;
       border-radius: 4px;
       font-size: 14px;
       cursor: pointer;
     }
     button:hover {
-      background: #333333;
-      border-color: #333333;
+      background: var(--purple-700);
+      border-color: var(--purple-700);
     }
     .button-secondary {
       background: transparent;
-      color: #000000;
+      color: var(--purple-600);
+      border-color: var(--purple-600);
     }
     .button-secondary:hover {
-      background: rgba(0, 0, 0, 0.10);
-      border-color: #333333;
-      color: #333333;
+      background: rgba(109, 40, 217, 0.12);
+      border-color: var(--purple-700);
+      color: var(--purple-700);
     }
   </style>
 </head>
@@ -91,6 +96,10 @@
   <div class="form-container">
     <h1>Contact Form</h1>
     <form id="contactForm">
+      <div class="form-actions">
+        <button type="reset" class="button-secondary">Clear</button>
+        <button type="submit">Submit</button>
+      </div>
       <label for="name">Name</label>
       <input type="text" id="name" name="name" required>
       <label for="email">Email</label>
@@ -113,11 +122,6 @@
 
       <label for="message">Message</label>
       <textarea id="message" name="message" required></textarea>
-
-      <div class="form-actions">
-        <button type="reset" class="button-secondary">Clear</button>
-        <button type="submit">Submit</button>
-      </div>
     </form>
   </div>
   <script>
