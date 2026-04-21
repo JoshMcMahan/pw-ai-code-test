@@ -60,12 +60,17 @@
       min-height: 100px;
       resize: vertical;
     }
-    .form-actions {
+    .page-actions {
+      position: fixed;
+      top: 16px;
+      left: 0;
+      right: 0;
       display: flex;
       justify-content: flex-end;
       gap: 12px;
-      margin: 0 0 16px;
-      padding: 0;
+      padding: 0 16px;
+      z-index: 10;
+      pointer-events: none;
     }
     button {
       background: var(--purple-600);
@@ -75,6 +80,7 @@
       border-radius: 4px;
       font-size: 14px;
       cursor: pointer;
+      pointer-events: auto;
     }
     button:hover {
       background: var(--purple-700);
@@ -93,13 +99,13 @@
   </style>
 </head>
 <body>
+  <div class="page-actions">
+    <button type="reset" class="button-secondary" form="contactForm">Clear</button>
+    <button type="submit" form="contactForm">Submit</button>
+  </div>
   <div class="form-container">
     <h1>Contact Form</h1>
     <form id="contactForm">
-      <div class="form-actions">
-        <button type="reset" class="button-secondary">Clear</button>
-        <button type="submit">Submit</button>
-      </div>
       <label for="name">Name</label>
       <input type="text" id="name" name="name" required>
       <label for="email">Email</label>
